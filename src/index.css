@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+/* This ensures the body changes color when the .dark class is active */
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 transition-colors duration-300;
+  }
+
+  /* When the 'dark' class is on the <html> tag, these styles kick in */
+  .dark body {
+    @apply bg-slate-950 text-slate-100;
+  }
+}

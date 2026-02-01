@@ -1,46 +1,41 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Code2 } from 'lucide-react';
 
-const ProjectCard = ({ project, index }) => {
-  const statusColors = {
-    "Completed": "text-emerald-500 border-emerald-500/20 bg-emerald-500/5",
-    "In Progress": "text-blue-500 border-blue-500/20 bg-blue-500/5",
-    "Review": "text-purple-500 border-purple-500/20 bg-purple-500/5",
-    "Pending": "text-amber-500 border-amber-500/20 bg-amber-500/5",
-  };
+const ProjectCard = ({ project }) => {
+  // Spring configuration for that "snappy yet smooth" feel
+  const springConfig = { type: "spring", stiffness: 300, damping: 30 };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1 }}
-      whileHover={{ scale: 1.02 }}
-      className="group relative p-8 rounded-[32px] border border-slate-200 dark:border-slate-800 bg-slate-100/50 dark:bg-slate-900/50 backdrop-blur-sm transition-all hover:border-blue-500/50 shadow-sm"
+      layout
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={springConfig}
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
+      className="group relative p-8 rounded-[32px] border border-slate-200/60 dark:border-slate-800/60 bg-slate-200/10 dark:bg-slate-900/40 backdrop-blur-xl transition-colors hover:border-blue-500/40"
     >
       <div className="flex justify-between items-start mb-6">
-        <div className="p-3 bg-blue-600/10 text-blue-600 rounded-2xl">
+        <div className="p-3 bg-blue-600/10 text-blue-600 rounded-2xl group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
           <Code2 size={24} />
         </div>
-        <span className={`text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-lg border ${statusColors[project.status]}`}>
+        <div className="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-800 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
           {project.status}
-        </span>
+        </div>
       </div>
 
-      <h3 className="text-2xl font-bold text-slate-800 dark:text-white mb-2 group-hover:text-blue-500 transition-colors">
+      <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 leading-tight">
         {project.title}
       </h3>
-      <p className="text-sm text-slate-500 dark:text-slate-400 mb-6 font-medium">
+      <p className="text-sm text-slate-500 dark:text-slate-400 mb-8 font-medium">
         {project.tech}
       </p>
 
-      <div className="pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center">
-        <div>
-          <p className="text-[10px] uppercase tracking-tighter text-slate-400 mb-1">Deadline</p>
-          <p className="text-sm font-bold text-slate-700 dark:text-slate-300">{project.date}</p>
-        </div>
-        <motion.div whileHover={{ x: 3, y: -3 }} className="text-blue-600">
+      <div className="pt-6 border-t border-slate-200/50 dark:border-slate-800/50 flex justify-between items-center">
+        <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{project.date}</span>
+        <div className="text-blue-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
           <ArrowUpRight size={24} />
-        </motion.div>
+        </div>
       </div>
     </motion.div>
   );

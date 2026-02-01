@@ -5,7 +5,7 @@ import { ThemeProvider } from './components/ThemeContext';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import AuthModal from './components/AuthModal'; // New File
-
+import ProjectDetail from './pages/ProjectDetail';
 // Pages
 import Dashboard from "./pages/Dashboard";
 import OverallReport from "./pages/OverallReport";
@@ -26,11 +26,15 @@ function App() {
             <main className="p-8">
               <Routes>
                 <Route path="/" element={<Dashboard />} />
+  <Route path="/projects" element={<ProjectAssignments />} />
+  <Route path="/project/:id" element={<ProjectDetail />} />
+               
                 <Route path="/report" element={<OverallReport />} />
-                <Route path="/projects" element={<ProjectAssignments />} />
+                
                 <Route path="/assessments" element={<PageTemplate title="Assessments" />} />
                 <Route path="/calendar" element={<PageTemplate title="Calendar" />} />
                 <Route path="/courses" element={<PageTemplate title="Courses" />} />
+                <Route path="/project/:id" element={<ProjectDetail />} />
                 <Route path="/certificates" element={<PageTemplate title="Certificates" />} />
               </Routes>
             </main>
